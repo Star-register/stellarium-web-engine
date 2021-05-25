@@ -9,6 +9,7 @@ About
 Stellarium Web Engine is a JavaScript planetarium renderer using
 WebGL that can be embedded into a website.
 
+This fork is used by Star-Register (https://star-register.de). Some GUI tweaks were applied and the API-calls for receving planet data dynamically have been/will be replaced by calls to Star-Registers internal api.
 
 Features
 --------
