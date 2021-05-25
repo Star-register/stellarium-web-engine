@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:1.39.17
+FROM emscripten/emsdk:2.0.17
 
 RUN apt-get update && apt-get install -y wget build-essential apt-transport-https scons
 WORKDIR /app
