@@ -30,6 +30,7 @@ import BottomBar from '@/components/bottom-bar.vue'
 import SelectedObjectInfo from '@/components/selected-object-info.vue'
 import ProgressBars from '@/components/progress-bars'
 
+import About from '@/components/about.vue'
 import DataCreditsDialog from '@/components/data-credits-dialog.vue'
 import ViewSettingsDialog from '@/components/view-settings-dialog.vue'
 import PlanetsVisibility from '@/components/planets-visibility.vue'
@@ -59,7 +60,8 @@ export default {
         'data-credits-dialog',
         'view-settings-dialog',
         'planets-visibility',
-        'location-dialog'
+        'location-dialog',
+        'about'
       ]
       for (const i in this.$stellariumWebPlugins()) {
         const plugin = this.$stellariumWebPlugins()[i]
@@ -70,7 +72,7 @@ export default {
       return res
     }
   },
-  components: { Toolbar, BottomBar, DataCreditsDialog, ViewSettingsDialog, PlanetsVisibility, SelectedObjectInfo, LocationDialog, ProgressBars, ObservingPanel }
+  components: { Toolbar, BottomBar, About, DataCreditsDialog, ViewSettingsDialog, PlanetsVisibility, SelectedObjectInfo, LocationDialog, ProgressBars, ObservingPanel }
 }
 </script>
 
