@@ -27,6 +27,7 @@
           <span class="text-caption white--text" v-for="mname in otherNames8andMore" :key="mname" style="margin-right: 15px; font-weight: 500">{{ mname }}</span>
         </v-col>
       </v-row>
+      <!--
       <v-row style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Reg. Nr.</v-col>
         <v-col cols="8" style="font-weight: 500" class="white--text">{{ selectedObject.model_data.regnr }}</v-col>
@@ -39,6 +40,7 @@
         <v-col cols="4" style="color: #dddddd">Widmung</v-col>
         <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="selectedObject.model_data.widmung.replace(/\n|\\n/g, '<br>')"></span></v-col>
       </v-row>
+      -->
     </v-card-text>
     <v-card-text>
       <template v-for="item in items">
