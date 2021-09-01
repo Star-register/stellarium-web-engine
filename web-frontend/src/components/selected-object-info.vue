@@ -19,12 +19,25 @@
       </div>
     </v-card-title>
     <v-card-text style="padding-bottom: 5px;">
-      <v-row v-if="otherNames.length > 1" style="width: 100%;">
-        <v-col cols="12">
-          <span style="position: absolute;">{{ $t('Also known as') }}</span><span style="padding-left: 33.3333%">&nbsp;</span><span class="text-caption white--text" v-for="mname in otherNames1to7" :key="mname" style="margin-right: 15px; font-weight: 500;">{{ mname }}</span>
+      <v-row v-if="otherNames.length > 1" style="width: 100%;" no-gutters>
+        <v-col cols="4">{{ $t('Also known as') }}</v-col>
+        <v-col cols="8">
+          <span class="text-caption white--text" v-for="mname in otherNames1to7" :key="mname" style="margin-right: 15px; font-weight: 500;">{{ mname }}</span>
           <v-btn small icon class="grey--text" v-if="otherNames.length > 8" v-on:click.native="showMinorNames = !showMinorNames" style="margin-top: -5px; margin-bottom: -5px;"><v-icon>mdi-dots-horizontal</v-icon></v-btn>
           <span class="text-caption white--text" v-for="mname in otherNames8andMore" :key="mname" style="margin-right: 15px; font-weight: 500">{{ mname }}</span>
         </v-col>
+      </v-row>
+      <v-row v-if="selectedObject.model_data.regnr" style="width: 100%" no-gutters>
+        <v-col cols="4" style="color: #dddddd">Reg. Nr.</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ selectedObject.model_data.regnr }}</v-col>
+      </v-row>
+      <v-row v-if="selectedObject.model_data.regnr" style="width: 100%" no-gutters>
+        <v-col cols="4" style="color: #dddddd">Taufdatum</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ selectedObject.model_data.reg_datum.split('-').reverse().join('.') }}</v-col>
+      </v-row>
+      <v-row v-if="selectedObject.model_data.regnr" style="width: 100%" no-gutters>
+        <v-col cols="4" style="color: #dddddd">Widmung</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="selectedObject.model_data.widmung.replace(/\n|\\n/g, '<br>')"></span></v-col>
       </v-row>
     </v-card-text>
     <v-card-text>
