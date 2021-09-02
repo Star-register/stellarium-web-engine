@@ -411,7 +411,7 @@ export default {
         this.$store.state.selectedObject.model_data.reg_name = ss.model_data.reg_name
         this.$store.state.selectedObject.model_data.widmung = ss.model_data.widmung
         console.log('🚀 data reloaded')
-    })
+      })
     })
   }
 }
