@@ -153,7 +153,7 @@ export default {
           morpho = morpho + ' '
         }
       }
-      console.log("🚀 ~ file: selected-object-info.vue ~ line 180 ~ swh.nameForSkySourceType(this.selectedObject.types[0])", swh.nameForSkySourceType(this.selectedObject.types[0]))
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 180 ~ swh.nameForSkySourceType(this.selectedObject.types[0])', swh.nameForSkySourceType(this.selectedObject.types[0]))
       return morpho + swh.nameForSkySourceType(this.selectedObject.types[0])
     },
     icon: function () {
