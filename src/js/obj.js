@@ -380,10 +380,10 @@ Module.afterInit(function() {
     // ! Über Module._obj_create_str kann man absolut NIRGENDS irgendeine Info finden
     args = args ? stringToC(JSON.stringify(args)) : 0;
     const ctype = stringToC(type);
-    //// let ret = Module._obj_create_str(ctype, args);
+    let ret = Module._obj_create_str(ctype, args);
+    // Diese beiden Alternativen haben nicht funktioniert:
     //// let ret = Module.obj_create_str(ctype, args);
-    // Noch eine Alternative: (aber kann die Funktionieren)
-    let ret = obj_create_str(ctype, args);
+    //// let ret = obj_create_str(ctype, args);
     Module._free(type);
     Module._free(args);
     ret = ret ? new SweObj(ret) : null;
