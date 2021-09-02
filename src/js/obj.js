@@ -383,7 +383,7 @@ Module.afterInit(function() {
     //// let ret = Module._obj_create_str(ctype, args);
     let ret = Module.obj_create_str(ctype, args);
     // Noch eine Alternative: (aber kann die Funktionieren)
-    let ret = obj_create_str(ctype, args);
+    // let ret = obj_create_str(ctype, args);
     Module._free(type);
     Module._free(args);
     ret = ret ? new SweObj(ret) : null;
