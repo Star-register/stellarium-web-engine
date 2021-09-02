@@ -393,8 +393,10 @@ export default {
       console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
       console.log('🚀 data reload initiated')
       swh.lookupSkySourceByName(this.$store.state.selectedObject.names[0].slice(5)).then(ss => {
-        const {regnr, reg_datum, reg_name, widmung} = ss.model_data
-        this.ownData = {regnr, reg_datum, reg_name, widmung}
+        this.ownData.regnr = ss.model_data.regnr
+        this.ownData.reg_datum = ss.model_data.reg_datum
+        this.ownData.reg_name = ss.model_data.reg_name
+        this.ownData.widmung = ss.model_data.widmung
         console.log('🚀 data reloaded:', this.ownData)
       })
     }
