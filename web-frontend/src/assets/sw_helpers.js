@@ -274,7 +274,6 @@ const swh = {
       obj = $stel.getObj(gname)
     }
     if (obj === null) return undefined
-    
     return obj
   },
 
