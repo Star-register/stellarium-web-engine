@@ -183,19 +183,19 @@ export default {
       return res
     },
     isFromOwnAPI: function () {
-      console.log("🚀 ~ file: selected-object-info.vue ~ line 184 ~ !!this.selectedObject?.model_data?.regnr", !!this.selectedObject?.model_data?.regnr)
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 184 ~ isFromOwnAPI', !!this.selectedObject?.model_data?.regnr)
       return !!this.selectedObject?.model_data?.regnr
     },
     regnr: function () {
-      console.log("🚀 ~ file: selected-object-info.vue ~ line 188 ~ this.selectedObject?.model_data?.regnr", this.selectedObject?.model_data?.regnr)
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 188 ~ regnr', this.selectedObject?.model_data?.regnr)
       return this.selectedObject?.model_data?.regnr ?? ''
     },
     reg_datum: function () {
-      console.log("🚀 ~ file: selected-object-info.vue ~ line 201 ~ this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.')", this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.'))
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 201 ~ reg_datum', this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.'))
       return this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.') ?? ''
     },
     widmung: function () {
-      console.log("🚀 ~ file: selected-object-info.vue ~ line 202 ~ this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>')", this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>'))
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 202 ~ widmung', this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>'))
       return this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>') ?? ''
     }
   },
