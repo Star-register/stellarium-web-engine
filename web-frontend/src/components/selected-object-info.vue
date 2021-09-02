@@ -27,22 +27,17 @@
           <span class="text-caption white--text" v-for="mname in otherNames8andMore" :key="mname" style="margin-right: 15px; font-weight: 500">{{ mname }}</span>
         </v-col>
       </v-row>
-      <!--HERE Die ganze Komponente funktioniert nicht, wenn etwas ausgewählt wird, dass die Eigenschaften nicht hat. Doch iwie mit computed machen, wo dann default Werte zurückgegeben werden können, die ja eh nicht angezeigt werden, wenn v-if false ist. -->
-      <v-row style="width: 100%" no-gutters>
-        <v-col cols="4" style="color: #dddddd">isFromOwnAPI</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ isFromOwnAPI }}</v-col>
-      </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Reg. Nr.</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ regnr }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData.regnr }}</v-col>
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Taufdatum</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ reg_datum }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData.reg_datum.split('-').reverse().join('.') }}</v-col>
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Widmung</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="widmung"></span></v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="ownData.widmung.replace(/\r\n|\n\r|\r|\n|\\n/g, '<br>')"></span></v-col>
       </v-row>
     </v-card-text>
     <v-card-text>
@@ -108,7 +103,13 @@ export default {
       shareLink: undefined,
       showShareLinkDialog: false,
       copied: false,
-      items: []
+      items: [],
+      ownData: {
+        regnr: '',
+        reg_datum: '',
+        reg_name: '',
+        widmung: ''
+      }
     }
   },
   computed: {
@@ -183,23 +184,7 @@ export default {
       return res
     },
     isFromOwnAPI: function () {
-      console.log('🚀 ~ file: selected-object-info.vue ~ line 184 ~ selectedObject', this.selectedObject)
-      console.log('🚀 ~ file: selected-object-info.vue ~ line 184 ~ isFromOwnAPI', this.selectedObject?.model_data?.regnr)
-      console.log('🚀 always returning true')
-      return true
-      // return !!this.selectedObject?.model_data?.regnr
-    },
-    regnr: function () {
-      console.log('🚀 ~ file: selected-object-info.vue ~ line 188 ~ regnr', this.selectedObject?.model_data?.regnr)
-      return this.selectedObject?.model_data?.regnr ?? ''
-    },
-    reg_datum: function () {
-      console.log('🚀 ~ file: selected-object-info.vue ~ line 201 ~ reg_datum', this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.'))
-      return this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.') ?? ''
-    },
-    widmung: function () {
-      console.log('🚀 ~ file: selected-object-info.vue ~ line 202 ~ widmung', this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>'))
-      return this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>') ?? ''
+      return !!this.ownData.regnr
     }
   },
   watch: {
@@ -408,11 +393,9 @@ export default {
       console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
       console.log('🚀 data reload initiated')
       swh.lookupSkySourceByName(this.$store.state.selectedObject.names[0].slice(5)).then(ss => {
-        this.$store.state.selectedObject.model_data.regnr = ss.model_data.regnr
-        this.$store.state.selectedObject.model_data.reg_datum = ss.model_data.reg_datum
-        this.$store.state.selectedObject.model_data.reg_name = ss.model_data.reg_name
-        this.$store.state.selectedObject.model_data.widmung = ss.model_data.widmung
-        console.log('🚀 data reloaded')
+        const {regnr, reg_datum, reg_name, widmung} = ss.model_data
+        this.ownData = {regnr, reg_datum, reg_name, widmung}
+        console.log('🚀 data reloaded:', this.ownData)
       })
     }
   }
