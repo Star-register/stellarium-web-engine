@@ -274,6 +274,15 @@ const swh = {
       obj = $stel.getObj(gname)
     }
     if (obj === null) return undefined
+
+    if (ss.model_data.regnr) {
+      console.log("🚀 here in skySource2SweObj")
+      obj.v.model_data.regnr = ss.model_data.regnr
+      obj.v.model_data.reg_datum = ss.model_data.reg_datum
+      obj.v.model_data.reg_name = ss.model_data.reg_name
+      obj.v.model_data.widmung = ss.model_data.widmung
+    }
+
     return obj
   },
 
