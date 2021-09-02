@@ -394,8 +394,17 @@ export default {
       this.copied = document.execCommand('copy')
       window.getSelection().removeAllRanges()
       this.showShareLinkDialog = false
-    },
-    reloadAPIData: function () {
+    }
+  },
+  mounted: function () {
+    const that = this
+    window.addEventListener('mouseup', function (event) {
+      that.stopZoom()
+    })
+  },
+  updated: function () {
+    console.count("update")
+    if (this.$store.state.selectedObject && !this.$store.state.selectedObject.model_data?.regnr) {
       console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
       console.log('🚀 data reload initiated')
       swh.lookupSkySourceByName(this.$store.state.selectedObject.otherNames[0]).then(ss => {
@@ -406,16 +415,6 @@ export default {
         console.log('🚀 data reloaded')
       })
     }
-  },
-  mounted: function () {
-    const that = this
-    window.addEventListener('mouseup', function (event) {
-      that.stopZoom()
-    })
-
-    this.$nextTick(function () {
-      this.reloadAPIData()
-    })
   }
 }
 </script>
