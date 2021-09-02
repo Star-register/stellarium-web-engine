@@ -182,14 +182,14 @@ export default {
       return !!this.selectedObject?.model_data?.regnr
     },
     regnr: function () {
-      return this.selectedObject?.model_data?.regnr ?? ""
+      return this.selectedObject?.model_data?.regnr ?? ''
     },
     reg_datum: function () {
-      return this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.') ?? ""
+      return this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.') ?? ''
     },
     widmung: function () {
-      return this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>') ?? ""
-    },
+      return this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>') ?? ''
+    }
   },
   watch: {
     selectedObject: function (s) {
