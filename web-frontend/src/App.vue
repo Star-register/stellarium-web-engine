@@ -167,7 +167,6 @@ export default {
             obj = this.$stel.createObj(ss.model, ss)
             this.$selectionLayer.add(obj)
           }
-          console.log('🚀 made obj: ', obj)
           if (!obj) {
             console.warning("Can't find object in SWE: " + ss.names[0])
           }

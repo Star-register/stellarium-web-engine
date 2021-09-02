@@ -144,6 +144,7 @@ export default {
       return 'https://en.wikipedia.org/wiki/' + page.title
     },
     type: function () {
+      console.log('🚀 this.selectedObject', this.selectedObject)
       if (!this.selectedObject) return this.$t('Unknown')
       let morpho = ''
       if (this.selectedObject.model_data && this.selectedObject.model_data.morpho) {
@@ -152,6 +153,7 @@ export default {
           morpho = morpho + ' '
         }
       }
+      console.log("🚀 ~ file: selected-object-info.vue ~ line 180 ~ swh.nameForSkySourceType(this.selectedObject.types[0])", swh.nameForSkySourceType(this.selectedObject.types[0]))
       return morpho + swh.nameForSkySourceType(this.selectedObject.types[0])
     },
     icon: function () {
