@@ -394,6 +394,17 @@ export default {
       this.copied = document.execCommand('copy')
       window.getSelection().removeAllRanges()
       this.showShareLinkDialog = false
+    },
+    reloadAPIData: function () {
+      console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
+      console.log('🚀 data reload initiated')
+      swh.lookupSkySourceByName(that.$store.state.selectedObject.otherNames[0]).then(ss => {
+        this.$store.state.selectedObject.model_data.regnr = ss.model_data.regnr
+        this.$store.state.selectedObject.model_data.reg_datum = ss.model_data.reg_datum
+        this.$store.state.selectedObject.model_data.reg_name = ss.model_data.reg_name
+        this.$store.state.selectedObject.model_data.widmung = ss.model_data.widmung
+        console.log('🚀 data reloaded')
+      })
     }
   },
   mounted: function () {
@@ -403,15 +414,7 @@ export default {
     })
 
     this.$nextTick(function () {
-      console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
-      console.log('🚀 data reload initiated')
-      swh.lookupSkySourceByName(this.$store.state.selectedObject.otherNames[0]).then(ss => {
-        this.$store.state.selectedObject.model_data.regnr = ss.model_data.regnr
-        this.$store.state.selectedObject.model_data.reg_datum = ss.model_data.reg_datum
-        this.$store.state.selectedObject.model_data.reg_name = ss.model_data.reg_name
-        this.$store.state.selectedObject.model_data.widmung = ss.model_data.widmung
-        console.log('🚀 data reloaded')
-      })
+      this.reloadAPIData()
     })
   }
 }
