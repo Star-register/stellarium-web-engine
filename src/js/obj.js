@@ -19,8 +19,9 @@ Module.afterInit(function() {
     ['number', 'number']);
   var module_get_path = Module.cwrap('module_get_path', 'number',
     ['number', 'number']);
+  // ! Hier wird obj_create_str geladen, aber später wird stattdessen _obj_create_str verwendet.
   var obj_create_str = Module.cwrap('obj_create_str', 'number',
-    ['string', 'string'])
+    ['string', 'string']);
   var module_get_child = Module.cwrap('module_get_child', 'number',
     ['number', 'string']);
   var core_get_module = Module.cwrap('core_get_module', 'number', ['string']);
@@ -374,9 +375,15 @@ Module.afterInit(function() {
   Module['createObj'] = function(type, args) {
     // Don't use the emscripten wrapped version of obj_create_str, since
     // it seems to crash with large strings!
+    // ! In diesem Schritt gehen in einigen Fällen die types verloren
+    // ? In welchen Fällen?
+    // ! Über Module._obj_create_str kann man absolut NIRGENDS irgendeine Info finden
     args = args ? stringToC(JSON.stringify(args)) : 0;
     const ctype = stringToC(type);
-    let ret = Module._obj_create_str(ctype, args);
+    //// let ret = Module._obj_create_str(ctype, args);
+    let ret = Module.obj_create_str(ctype, args);
+    // Noch eine Alternative: (aber kann die Funktionieren)
+    let ret = obj_create_str(ctype, args);
     Module._free(type);
     Module._free(args);
     ret = ret ? new SweObj(ret) : null;
