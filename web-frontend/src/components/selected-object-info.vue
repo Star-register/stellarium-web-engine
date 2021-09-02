@@ -148,7 +148,7 @@ export default {
         }
       }
       let type = morpho + swh.nameForSkySourceType(this.selectedObject.types[0])
-      if (type === 'Unknown Type') type = swh.nameForSkySourceType(this.ownData)
+      if (type === 'Unknown Type') type = swh.nameForSkySourceType(this.ownData.types[0])
       return type
     },
     icon: function () {
