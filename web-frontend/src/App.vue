@@ -160,7 +160,7 @@ export default {
           if (!ss) {
             return
           }
-          console.log('🚀 got API response: ', ss)
+          console.log('got API response: ', ss)
           // * Will never happen with own stars, because they are not already in SWE
           let obj = swh.skySource2SweObj(ss)
           if (!obj) {

@@ -375,13 +375,12 @@ Module.afterInit(function() {
   Module['createObj'] = function(type, args) {
     // Don't use the emscripten wrapped version of obj_create_str, since
     // it seems to crash with large strings!
-    // ! In diesem Schritt gehen in einigen Fällen die types verloren
-    // ? In welchen Fällen?
-    // ! Über Module._obj_create_str kann man absolut NIRGENDS irgendeine Info finden
+    // * In diesem Schritt gehen in einigen Fällen die types verloren
+    // * Über Module._obj_create_str kann man absolut NIRGENDS irgendeine Info finden
     args = args ? stringToC(JSON.stringify(args)) : 0;
     const ctype = stringToC(type);
     let ret = Module._obj_create_str(ctype, args);
-    // Diese beiden Alternativen haben nicht funktioniert:
+    // * Diese beiden Alternativen haben nicht funktioniert:
     //// let ret = Module.obj_create_str(ctype, args);
     //// let ret = obj_create_str(ctype, args);
     Module._free(type);

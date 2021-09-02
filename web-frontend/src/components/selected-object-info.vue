@@ -139,7 +139,6 @@ export default {
       return 'https://en.wikipedia.org/wiki/' + page.title
     },
     type: function () {
-      console.log('🚀 this.selectedObject', this.selectedObject)
       if (!this.selectedObject) return this.$t('Unknown')
       let morpho = ''
       if (this.selectedObject.model_data && this.selectedObject.model_data.morpho) {
@@ -148,9 +147,8 @@ export default {
           morpho = morpho + ' '
         }
       }
-      console.log('🚀 ~ file: selected-object-info.vue ~ line 180 ~ swh.nameForSkySourceType(this.selectedObject.types[0])', swh.nameForSkySourceType(this.selectedObject.types[0]))
       let type = morpho + swh.nameForSkySourceType(this.selectedObject.types[0])
-      if (type === 'Unknown Type') type = swh.nameForSkySource(this.ownData)
+      if (type === 'Unknown Type') type = swh.nameForSkySourceType(this.ownData)
       return type
     },
     icon: function () {
@@ -390,7 +388,7 @@ export default {
       swh.lookupSkySourceByName(name).then(ss => {
         if (!ss) return console.warn('got no skysource')
         this.$store.commit('setSelectedOwnData', ss)
-        console.log('🚀 data reloaded:', this.ownData)
+        console.log('data reloaded:', this.ownData)
       })
     }
   },
