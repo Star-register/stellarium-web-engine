@@ -388,10 +388,7 @@ export default {
     })
   },
   updated: function () {
-    console.count('update')
-    if (this.$store.state.selectedObject && !this.$store.state.selectedObject.model_data?.regnr) {
-      console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
-      console.log('🚀 data reload initiated')
+    if (this.$store.state.selectedObject && !this.ownData.regnr) {
       swh.lookupSkySourceByName(this.$store.state.selectedObject.names[0].slice(5)).then(ss => {
         this.ownData.regnr = ss.model_data.regnr
         this.ownData.reg_datum = ss.model_data.reg_datum
