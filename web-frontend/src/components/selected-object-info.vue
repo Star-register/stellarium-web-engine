@@ -104,7 +104,7 @@ export default {
       showShareLinkDialog: false,
       copied: false,
       items: [],
-      prevName: ""
+      prevName: ''
     }
   },
   computed: {
