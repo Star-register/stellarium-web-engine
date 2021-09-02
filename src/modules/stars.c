@@ -37,10 +37,6 @@ typedef struct {
     // List of extra names, separated by '\0', terminated by two '\0'.
     char    *names;
     char    *sp_type;
-    char    *regnr;
-    char    *reg_datum;
-    char    *reg_name;
-    char    *widmung;
 } star_t;
 
 typedef struct survey survey_t;
@@ -242,18 +238,6 @@ static json_value *star_get_json_data(const obj_t *obj)
     }
     if (star->sp_type) {
         json_object_push(md, "spect_t", json_string_new(star->sp_type));
-    }
-    if (star->regnr) {
-        json_object_push(md, "regnr", json_string_new(star->regnr));
-    }
-    if (star->reg_datum) {
-        json_object_push(md, "reg_datum", json_string_new(star->reg_datum));
-    }
-    if (star->reg_name) {
-        json_object_push(md, "reg_name", json_string_new(star->reg_name));
-    }
-    if (star->widmung) {
-        json_object_push(md, "widmung", json_string_new(star->widmung));
     }
     json_object_push(ret, "model_data", md);
     return ret;
