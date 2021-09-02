@@ -29,15 +29,15 @@
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Reg. Nr.</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData.regnr }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData.model_data.regnr }}</v-col>
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Taufdatum</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData.reg_datum.split('-').reverse().join('.') }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData.model_data.reg_datum.split('-').reverse().join('.') }}</v-col>
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Widmung</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="ownData.widmung.replace(/\r\n|\n\r|\r|\n|\\n/g, '<br>')"></span></v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="ownData.model_data.widmung.replace(/\r\n|\n\r|\r|\n|\\n/g, '<br>')"></span></v-col>
       </v-row>
     </v-card-text>
     <v-card-text>
@@ -104,12 +104,7 @@ export default {
       showShareLinkDialog: false,
       copied: false,
       items: [],
-      ownData: {
-        regnr: '',
-        reg_datum: '',
-        reg_name: '',
-        widmung: ''
-      }
+      prevName: ""
     }
   },
   computed: {
@@ -154,10 +149,14 @@ export default {
         }
       }
       console.log('🚀 ~ file: selected-object-info.vue ~ line 180 ~ swh.nameForSkySourceType(this.selectedObject.types[0])', swh.nameForSkySourceType(this.selectedObject.types[0]))
-      return morpho + swh.nameForSkySourceType(this.selectedObject.types[0])
+      let type = morpho + swh.nameForSkySourceType(this.selectedObject.types[0])
+      if (type === 'Unknown Type') type = swh.nameForSkySource(this.ownData)
+      return type
     },
     icon: function () {
-      return swh.iconForSkySource(this.selectedObject)
+      let icon = swh.iconForSkySource(this.selectedObject)
+      if (icon.endsWith('unknown.svg')) icon = swh.iconForSkySource(this.ownData)
+      return icon
     },
     showPointToButton: function () {
       if (!this.$store.state.stel.lock) return true
@@ -185,8 +184,11 @@ export default {
       }
       return res
     },
+    ownData: function () {
+      return this.$store.state.selectedOwnData
+    },
     isFromOwnAPI: function () {
-      return this.title === this.ownData.reg_name
+      return this.title === this.ownData.model_data.reg_name
     }
   },
   watch: {
@@ -381,6 +383,15 @@ export default {
       this.copied = document.execCommand('copy')
       window.getSelection().removeAllRanges()
       this.showShareLinkDialog = false
+    },
+    reloadData: function () {
+      // ? is okay to always use the regnr from the URL?
+      const name = decodeURIComponent(this.$route.path.substring(11))
+      swh.lookupSkySourceByName(name).then(ss => {
+        if (!ss) return console.warn('got no skysource')
+        this.$store.commit('setSelectedOwnData', ss)
+        console.log('🚀 data reloaded:', this.ownData)
+      })
     }
   },
   mounted: function () {
@@ -389,14 +400,13 @@ export default {
       that.stopZoom()
     })
 
-    const name = decodeURIComponent(this.$route.path.substring(11))
-    swh.lookupSkySourceByName(name).then(ss => {
-      this.ownData.regnr = ss.model_data.regnr
-      this.ownData.reg_datum = ss.model_data.reg_datum
-      this.ownData.reg_name = ss.model_data.reg_name
-      this.ownData.widmung = ss.model_data.widmung
-      console.log('🚀 data reloaded:', this.ownData)
-    })
+    this.reloadData()
+  },
+  updated: function () {
+    if (this.selectedObject && this.title !== this.prevName) {
+      this.reloadData()
+      this.prevName = this.title
+    }
   }
 }
 </script>

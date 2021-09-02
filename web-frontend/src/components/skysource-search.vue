@@ -59,6 +59,7 @@ export default {
     sourceClicked: function (val) {
       this.$emit('input', val)
       this.resetSearch()
+      this.$store.commit('setSelectedOwnData', val)
     },
     resetSearch: function () {
       this.searchText = ''

@@ -36,6 +36,7 @@ const createStore = () => {
       showPlanetsVisibilityDialog: false,
       showLocationDialog: false,
       selectedObject: undefined,
+      selectedOwnData: null,
 
       showSidePanel: false,
 
@@ -101,6 +102,9 @@ const createStore = () => {
       },
       setSelectedObject (state, newValue) {
         state.selectedObject = newValue
+      },
+      setSelectedOwnData (state, newValue) {
+        state.selectedOwnData = newValue
       }
     }
   })
