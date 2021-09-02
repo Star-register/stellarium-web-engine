@@ -183,8 +183,12 @@ export default {
       return res
     },
     isFromOwnAPI: function () {
-      console.log('🚀 ~ file: selected-object-info.vue ~ line 184 ~ isFromOwnAPI', !!this.selectedObject?.model_data?.regnr)
-      return !!this.selectedObject?.model_data?.regnr
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 184 ~ selectedObject', this.selectedObject)
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 184 ~ selectedObject()', this.selectedObject())
+      console.log('🚀 ~ file: selected-object-info.vue ~ line 184 ~ isFromOwnAPI', this.selectedObject?.model_data?.regnr)
+      console.log('🚀 always returning true')
+      return true
+      // return !!this.selectedObject?.model_data?.regnr
     },
     regnr: function () {
       console.log('🚀 ~ file: selected-object-info.vue ~ line 188 ~ regnr', this.selectedObject?.model_data?.regnr)
