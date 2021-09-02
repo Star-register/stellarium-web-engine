@@ -407,7 +407,7 @@ export default {
     if (this.$store.state.selectedObject && !this.$store.state.selectedObject.model_data?.regnr) {
       console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
       console.log('🚀 data reload initiated')
-      swh.lookupSkySourceByName(this.$store.state.selectedObject.otherNames[0]).then(ss => {
+      swh.lookupSkySourceByName(this.$store.state.selectedObject.names[0].slice(5)).then(ss => {
         this.$store.state.selectedObject.model_data.regnr = ss.model_data.regnr
         this.$store.state.selectedObject.model_data.reg_datum = ss.model_data.reg_datum
         this.$store.state.selectedObject.model_data.reg_name = ss.model_data.reg_name
