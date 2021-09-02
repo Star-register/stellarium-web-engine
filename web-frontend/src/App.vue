@@ -160,9 +160,9 @@ export default {
           if (!ss) {
             return
           }
-          console.log('🚀 got API response: ', ss);
+          console.log('🚀 got API response: ', ss)
           let obj = swh.skySource2SweObj(ss)
-          console.log('🚀 called swh.skySource2SweObj: ', obj);
+          console.log('🚀 called swh.skySource2SweObj: ', obj)
           if (!obj) {
             console.log('🚀 ~ file: App.vue ~ line 166 ~ returnswh.lookupSkySourceByName ~ swh.skySource2SweObj did not work -> this.$stel.createObj')
             obj = this.$stel.createObj(ss.model, ss)
