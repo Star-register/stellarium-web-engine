@@ -27,20 +27,19 @@
           <span class="text-caption white--text" v-for="mname in otherNames8andMore" :key="mname" style="margin-right: 15px; font-weight: 500">{{ mname }}</span>
         </v-col>
       </v-row>
-      <!--
-      <v-row style="width: 100%" no-gutters>
+      <!--HERE Die ganze Komponente funktioniert nicht, wenn etwas ausgewählt wird, dass die Eigenschaften nicht hat. Doch iwie mit computed machen, wo dann default Werte zurückgegeben werden können, die ja eh nicht angezeigt werden, wenn v-if false ist. -->
+      <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Reg. Nr.</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ selectedObject.model_data.regnr }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ regnr }}</v-col>
       </v-row>
-      <v-row style="width: 100%" no-gutters>
+      <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Taufdatum</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ selectedObject.model_data.reg_datum.split('-').reverse().join('.') }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ reg_datum }}</v-col>
       </v-row>
-      <v-row style="width: 100%" no-gutters>
+      <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Widmung</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="selectedObject.model_data.widmung.replace(/\n|\\n/g, '<br>')"></span></v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="widmung"></span></v-col>
       </v-row>
-      -->
     </v-card-text>
     <v-card-text>
       <template v-for="item in items">
@@ -178,7 +177,19 @@ export default {
         }
       }
       return res
-    }
+    },
+    isFromOwnAPI: function () {
+      return !!this.selectedObject?.model_data?.regnr
+    },
+    regnr: function () {
+      return this.selectedObject?.model_data?.regnr ?? ""
+    },
+    reg_datum: function () {
+      return this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.') ?? ""
+    },
+    widmung: function () {
+      return this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>') ?? ""
+    },
   },
   watch: {
     selectedObject: function (s) {
