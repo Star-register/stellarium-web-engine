@@ -28,6 +28,10 @@
         </v-col>
       </v-row>
       <!--HERE Die ganze Komponente funktioniert nicht, wenn etwas ausgewählt wird, dass die Eigenschaften nicht hat. Doch iwie mit computed machen, wo dann default Werte zurückgegeben werden können, die ja eh nicht angezeigt werden, wenn v-if false ist. -->
+      <v-row style="width: 100%" no-gutters>
+        <v-col cols="4" style="color: #dddddd">isFromOwnAPI</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ isFromOwnAPI }}</v-col>
+      </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Reg. Nr.</v-col>
         <v-col cols="8" style="font-weight: 500" class="white--text">{{ regnr }}</v-col>
@@ -179,15 +183,19 @@ export default {
       return res
     },
     isFromOwnAPI: function () {
+      console.log("🚀 ~ file: selected-object-info.vue ~ line 184 ~ !!this.selectedObject?.model_data?.regnr", !!this.selectedObject?.model_data?.regnr)
       return !!this.selectedObject?.model_data?.regnr
     },
     regnr: function () {
+      console.log("🚀 ~ file: selected-object-info.vue ~ line 188 ~ this.selectedObject?.model_data?.regnr", this.selectedObject?.model_data?.regnr)
       return this.selectedObject?.model_data?.regnr ?? ''
     },
     reg_datum: function () {
+      console.log("🚀 ~ file: selected-object-info.vue ~ line 201 ~ this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.')", this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.'))
       return this.selectedObject?.model_data?.reg_datum?.split('-').reverse().join('.') ?? ''
     },
     widmung: function () {
+      console.log("🚀 ~ file: selected-object-info.vue ~ line 202 ~ this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>')", this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>'))
       return this.selectedObject?.model_data?.widmung?.replace(/\n|\\n/g, '<br>') ?? ''
     }
   },
