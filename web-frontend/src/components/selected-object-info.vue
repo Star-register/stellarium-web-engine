@@ -403,7 +403,7 @@ export default {
     })
   },
   updated: function () {
-    console.count("update")
+    console.count('update')
     if (this.$store.state.selectedObject && !this.$store.state.selectedObject.model_data?.regnr) {
       console.log('🚀 this.$store.state.selectedObject', this.$store.state.selectedObject)
       console.log('🚀 data reload initiated')
