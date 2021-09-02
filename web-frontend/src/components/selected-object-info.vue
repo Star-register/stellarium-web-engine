@@ -20,7 +20,7 @@
     </v-card-title>
     <v-card-text style="padding-bottom: 5px;">
       <v-row v-if="otherNames.length > 1" style="width: 100%;" no-gutters>
-        <v-col cols="4">{{ $t('Also known as') }}</v-col>
+        <v-col cols="4" style="color: #dddddd">{{ $t('Also known as') }}</v-col>
         <v-col cols="8">
           <span class="text-caption white--text" v-for="mname in otherNames1to7" :key="mname" style="margin-right: 15px; font-weight: 500;">{{ mname }}</span>
           <v-btn small icon class="grey--text" v-if="otherNames.length > 8" v-on:click.native="showMinorNames = !showMinorNames" style="margin-top: -5px; margin-bottom: -5px;"><v-icon>mdi-dots-horizontal</v-icon></v-btn>

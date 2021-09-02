@@ -161,13 +161,13 @@ export default {
             return
           }
           console.log('🚀 got API response: ', ss)
+          // * Will never happen with own stars, because they are not already in SWE
           let obj = swh.skySource2SweObj(ss)
-          console.log('🚀 called swh.skySource2SweObj: ', obj)
           if (!obj) {
-            console.log('🚀 ~ file: App.vue ~ line 166 ~ returnswh.lookupSkySourceByName ~ swh.skySource2SweObj did not work -> this.$stel.createObj')
             obj = this.$stel.createObj(ss.model, ss)
             this.$selectionLayer.add(obj)
           }
+          console.log('🚀 made obj: ', obj)
           if (!obj) {
             console.warning("Can't find object in SWE: " + ss.names[0])
           }
