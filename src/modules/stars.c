@@ -239,6 +239,18 @@ static json_value *star_get_json_data(const obj_t *obj)
     if (star->sp_type) {
         json_object_push(md, "spect_t", json_string_new(star->sp_type));
     }
+    if (star->regnr) {
+        json_object_push(md, "spect_t", json_string_new(star->regnr));
+    }
+    if (star->reg_datum) {
+        json_object_push(md, "spect_t", json_string_new(star->reg_datum));
+    }
+    if (star->reg_name) {
+        json_object_push(md, "spect_t", json_string_new(star->reg_name));
+    }
+    if (star->widmung) {
+        json_object_push(md, "spect_t", json_string_new(star->widmung));
+    }
     json_object_push(ret, "model_data", md);
     return ret;
 }
