@@ -388,17 +388,15 @@ export default {
     window.addEventListener('mouseup', function (event) {
       that.stopZoom()
     })
-  },
-  updated: function () {
-    if (this.$store.state.selectedObject && !this.ownData.regnr) {
-      swh.lookupSkySourceByName(this.$store.state.selectedObject.names[0].slice(5)).then(ss => {
-        this.ownData.regnr = ss.model_data.regnr
-        this.ownData.reg_datum = ss.model_data.reg_datum
-        this.ownData.reg_name = ss.model_data.reg_name
-        this.ownData.widmung = ss.model_data.widmung
-        console.log('🚀 data reloaded:', this.ownData)
-      })
-    }
+
+    const name = decodeURIComponent(this.$route.path.substring(11))
+    swh.lookupSkySourceByName(name).then(ss => {
+      this.ownData.regnr = ss.model_data.regnr
+      this.ownData.reg_datum = ss.model_data.reg_datum
+      this.ownData.reg_name = ss.model_data.reg_name
+      this.ownData.widmung = ss.model_data.widmung
+      console.log('🚀 data reloaded:', this.ownData)
+    })
   }
 }
 </script>
