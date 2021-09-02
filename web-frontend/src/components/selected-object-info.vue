@@ -126,10 +126,10 @@ export default {
       return this.selectedObject ? swh.namesForSkySource(this.selectedObject, 26) : undefined
     },
     otherNames1to7: function () {
-      return this.otherNames.slice(1, 8)
+      return this.otherNames.slice(1, 3)
     },
     otherNames8andMore: function () {
-      return this.showMinorNames ? this.otherNames.slice(8) : []
+      return this.showMinorNames ? this.otherNames.slice(3) : []
     },
     wikipediaSummary: function () {
       if (!this.wikipediaData) return ''
