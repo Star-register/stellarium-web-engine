@@ -184,7 +184,7 @@ export default {
       return res
     },
     isFromOwnAPI: function () {
-      return !!this.ownData.regnr
+      return this.title === this.ownData.reg_name
     }
   },
   watch: {
