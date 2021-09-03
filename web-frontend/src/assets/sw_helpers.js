@@ -233,12 +233,12 @@ const swh = {
   },
 
   getShareLink: function (context) {
-    let link = 'https://deinstern.star-register.de/'
+    let link = ''
     const ownData = context.$store.state.ownDataArchive.get(context.$store.state.selectedObject.names[0].slice(5))
     if (ownData) {
-      link += 'skysource/' + ownData.model_data.regnr
+      link += 'https://deinstern.star-register.de/skysource/' + ownData.model_data.regnr
     } else if (context.$store.state.selectedObject) {
-      link += 'skysource/' + this.cleanupOneSkySourceName(context.$store.state.selectedObject.names[0], 5).replace(/\s+/g, '')
+      link += 'https://stellarium-web.org/skysource/' + this.cleanupOneSkySourceName(context.$store.state.selectedObject.names[0], 5).replace(/\s+/g, '')
       link += '?'
       link += 'fov=' + (context.$store.state.stel.fov * 180 / Math.PI).toPrecision(5)
       const d = new Date()
