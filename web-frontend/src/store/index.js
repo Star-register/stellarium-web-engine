@@ -104,7 +104,7 @@ const createStore = () => {
         state.selectedObject = newValue
       },
       addOwnData (state, newValue) {
-        state.ownDataArchive.set(newValue.data_model.reg_name, newValue)
+        state.ownDataArchive.set(newValue.model_data.reg_name, newValue)
       }
     }
   })
