@@ -233,7 +233,7 @@ const swh = {
   },
 
   getShareLink: function (context) {
-    let link = 'https://stellarium-web.org/'
+    let link = 'https://deinstern.star-register.de/'
     if (context.$store.state.selectedObject) {
       link += 'skysource/' + this.cleanupOneSkySourceName(context.$store.state.selectedObject.names[0], 5).replace(/\s+/g, '')
     }
