@@ -84,10 +84,7 @@ export default {
     nameForSkySource: function (s) {
       const cn = swh.cleanupOneSkySourceName(s.match)
       const n = swh.nameForSkySource(s)
-      if (cn === n) {
-        return n
-      } else {
-        return cn + ' (' + n + ')'
+      return n
       }
     },
     typeToName: function (t) {
