@@ -29,15 +29,15 @@
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Reg. Nr.</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData?.model_data.regnr }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData && ownData.model_data.regnr }}</v-col>
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Taufdatum</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData?.model_data.reg_datum.split('-').reverse().join('.') }}</v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text">{{ ownData &&  ownData.model_data.reg_datum.split('-').reverse().join('.') }}</v-col>
       </v-row>
       <v-row v-if="isFromOwnAPI" style="width: 100%" no-gutters>
         <v-col cols="4" style="color: #dddddd">Widmung</v-col>
-        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="ownData?.model_data.widmung.replace(/\r\n|\n\r|\r|\n|\\n/g, '<br>')"></span></v-col>
+        <v-col cols="8" style="font-weight: 500" class="white--text"><span v-html="ownData && ownData.model_data.widmung.replace(/\r\n|\n\r|\r|\n|\\n/g, '<br>')"></span></v-col>
       </v-row>
     </v-card-text>
     <v-card-text>
