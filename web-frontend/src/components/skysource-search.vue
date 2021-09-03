@@ -85,7 +85,6 @@ export default {
       const cn = swh.cleanupOneSkySourceName(s.match)
       const n = swh.nameForSkySource(s)
       return n
-      }
     },
     typeToName: function (t) {
       return swh.nameForSkySourceType(t)
