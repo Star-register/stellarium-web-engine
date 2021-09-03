@@ -82,7 +82,7 @@ export default {
       }, err => { console.log(err) })
     }, 200),
     nameForSkySource: function (s) {
-      const cn = swh.cleanupOneSkySourceName(s.match)
+      // const cn = swh.cleanupOneSkySourceName(s.match)
       const n = swh.nameForSkySource(s)
       return n
     },
