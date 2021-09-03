@@ -59,7 +59,7 @@ export default {
     sourceClicked: function (val) {
       this.$emit('input', val)
       this.resetSearch()
-      this.$store.commit('setSelectedOwnData', val)
+      this.$store.commit('addOwnData', val)
     },
     resetSearch: function () {
       this.searchText = ''

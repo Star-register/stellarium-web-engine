@@ -36,7 +36,7 @@ const createStore = () => {
       showPlanetsVisibilityDialog: false,
       showLocationDialog: false,
       selectedObject: undefined,
-      selectedOwnData: null,
+      ownDataArchive: new Map(),
 
       showSidePanel: false,
 
@@ -103,8 +103,8 @@ const createStore = () => {
       setSelectedObject (state, newValue) {
         state.selectedObject = newValue
       },
-      setSelectedOwnData (state, newValue) {
-        state.selectedOwnData = newValue
+      addOwnData (state, newValue) {
+        state.ownDataArchive.set(newValue.data_model.reg_name, newValue)
       }
     }
   })
