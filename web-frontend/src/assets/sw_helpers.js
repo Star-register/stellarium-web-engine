@@ -234,7 +234,7 @@ const swh = {
 
   getShareLink: function (context) {
     let link = 'https://deinstern.star-register.de/'
-    let ownData = context.$store.state.ownDataArchive.get(context.$store.state.selectedObject.names[0])
+    const ownData = context.$store.state.ownDataArchive.get(context.$store.state.selectedObject.names[0])
     if (ownData) {
       link += 'skysource/' + ownData.model_data.regnr
     } else if (context.$store.state.selectedObject) {
